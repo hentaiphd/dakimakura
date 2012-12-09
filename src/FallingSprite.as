@@ -8,20 +8,21 @@ package{
 
         public function FallingSprite(x:int){
             super(30,30);
-            this.color = 0x0000000;
+            this.makeGraphic(10, 10, 0x4E0B1FFF);
 
             this.x = x;
             this.y = 0;
 
             var fallSpeed:uint = 100;
-            drag.x = fallSpeed*8;
-            drag.y = fallSpeed*8;
+            drag.x = fallSpeed*5;
+            drag.y = fallSpeed*5;
 
             timeAlive = 0;
 
         }
 
         override public function update():void{
+
             super.update();
 
             timeAlive++;

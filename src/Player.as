@@ -7,9 +7,9 @@ package{
         public function Player(){
             super(0,2,sprite);
 
-            var runSpeed:uint = 50;
-            drag.x = runSpeed*8;
-            drag.y = runSpeed*8;
+            var runSpeed:uint = 10;
+            drag.x = runSpeed*80;
+            drag.y = runSpeed*80;
 
             loadGraphic(sprite, false, true, 32, 32, true);
 
