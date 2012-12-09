@@ -39,11 +39,16 @@ package
 
             FlxG.collide(_player, _fallingsprites, collisionCallback);
 
+            FlxG.collide(_fallingsprites, _fallingsprites, spritePile);
+
             super.update();
     }
 
         public function collisionCallback(player:FlxObject, sprite:FallingSprite):void{
             sprite.makeGraphic(10, 10, 0xFFFF0000);
+        }
+
+        public function spritePile(sprite1:FallingSprite, sprite2:FallingSprite):void{
         }
 
         public function borderCollide(wallSprite:FlxSprite):void{
