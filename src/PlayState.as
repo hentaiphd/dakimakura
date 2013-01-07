@@ -10,6 +10,7 @@ package
         private var time:int;
         private var boob:FallingSprite;
         private var p:Pillow;
+        private var score:FlxText;
 
         override public function create():void{
             FlxG.debug = true;
@@ -29,6 +30,14 @@ package
                 p = new Pillow(_player.x, _player.y)
                 this.add(p)
                 _pillows.add(p);
+
+            score = new FlxText(10, 10, 100);
+            score.color = 0xFFFF0000;
+            score.scrollFactor.x = 0;
+            score.scrollFactor.y = 0;
+            score.text = toString();
+            add(score);
+
             }
         }
 
@@ -55,10 +64,15 @@ package
                 p = new Pillow(_player.x, _player.y)
                 this.add(p)
                 _pillows.add(p);
+                FlxG.overlap(p, _pillows, killCollidePillow);
             }
 
             super.update();
     }
+
+        public function killCollidePillow(pillow1:Pillow, pillow2:Pillow):void{
+            pillow2.kill();
+        }
 
         public function collisionCallback(player:FlxObject, sprite:FallingSprite):void{
             sprite.makeGraphic(10, 10, 0xFFFF0000);
@@ -67,6 +81,8 @@ package
         public function collisionCallback2(sprite:FallingSprite, pillow:Pillow):void{
             sprite.kill();
             pillow.kill();
+            FlxG.score += 1;
+            score.text = FlxG.score.toString()
         }
 
         //public function spritePile(sprite1:FallingSprite, sprite2:FallingSprite):void{
