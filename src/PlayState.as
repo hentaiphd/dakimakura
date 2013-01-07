@@ -6,8 +6,10 @@ package
 
         private var _player:Player;
         private var _fallingsprites:FlxGroup;
+        private var _pillows:FlxGroup;
         private var time:int;
         private var boob:FallingSprite;
+        private var p:Pillow;
 
         override public function create():void{
             FlxG.debug = true;
@@ -21,6 +23,13 @@ package
             boob = new FallingSprite(Math.floor(Math.random()*(1+(FlxG.width))));
             this.add(boob)
             _fallingsprites.add(boob);
+
+            _pillows = new FlxGroup();
+            if(FlxG.keys.DOWN){
+                p = new Pillow(_player.x, _player.y)
+                this.add(p)
+                _pillows.add(p);
+            }
         }
 
         override public function update():void{
@@ -31,15 +40,22 @@ package
                 borderCollide(_fallingsprites.members[i]);
             }
 
-            if(time%20==0){
+            if(time%50==0){
                 boob = new FallingSprite(Math.floor(Math.random()*(1+(FlxG.width))));
                 this.add(boob);
                 _fallingsprites.add(boob);
                 }
 
             FlxG.collide(_player, _fallingsprites, collisionCallback);
+            FlxG.collide(_player, _pillows, collisionCallback2);
 
-            FlxG.collide(_fallingsprites, _fallingsprites, spritePile);
+            //FlxG.collide(_fallingsprites, _fallingsprites, spritePile);
+
+            if(FlxG.keys.DOWN){
+                p = new Pillow(_player.x, _player.y)
+                this.add(p)
+                _pillows.add(p);
+            }
 
             super.update();
     }
@@ -48,8 +64,13 @@ package
             sprite.makeGraphic(10, 10, 0xFFFF0000);
         }
 
-        public function spritePile(sprite1:FallingSprite, sprite2:FallingSprite):void{
+        public function collisionCallback2(sprite:FallingSprite, pillow:Pillow):void{
+            sprite.makeGraphic(10, 10, 0xFFFF0000);
+            pillow.makeGraphic(20, 20, 0xFFFF0000);
         }
+
+        //public function spritePile(sprite1:FallingSprite, sprite2:FallingSprite):void{
+        //}
 
         public function borderCollide(wallSprite:FlxSprite):void{
             if(wallSprite.x >= FlxG.width - wallSprite.width)

@@ -27,6 +27,10 @@ package{
 
             timeAlive++;
             this.y += 1;
+
+            if (this.y >= 500){
+                kill();
+            }
         }
 
         private function falling():Number{
