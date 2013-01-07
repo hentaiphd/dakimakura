@@ -25,7 +25,7 @@ package
             _fallingsprites.add(boob);
 
             _pillows = new FlxGroup();
-            if(FlxG.keys.DOWN){
+            if(FlxG.keys.justPressed("DOWN")){
                 p = new Pillow(_player.x, _player.y)
                 this.add(p)
                 _pillows.add(p);
@@ -47,11 +47,11 @@ package
                 }
 
             FlxG.collide(_player, _fallingsprites, collisionCallback);
-            FlxG.collide(_player, _pillows, collisionCallback2);
+            FlxG.collide(_fallingsprites, _pillows, collisionCallback2);
 
             //FlxG.collide(_fallingsprites, _fallingsprites, spritePile);
 
-            if(FlxG.keys.DOWN){
+            if(FlxG.keys.justPressed("DOWN")){
                 p = new Pillow(_player.x, _player.y)
                 this.add(p)
                 _pillows.add(p);
@@ -65,8 +65,8 @@ package
         }
 
         public function collisionCallback2(sprite:FallingSprite, pillow:Pillow):void{
-            sprite.makeGraphic(10, 10, 0xFFFF0000);
-            pillow.makeGraphic(20, 20, 0xFFFF0000);
+            sprite.kill();
+            pillow.kill();
         }
 
         //public function spritePile(sprite1:FallingSprite, sprite2:FallingSprite):void{
