@@ -10,7 +10,9 @@ package
         private var time:int;
         private var boob:FallingSprite;
         private var p:Pillow;
-        private var score:FlxText;
+        //private var score:FlxText;
+        private var slider:Slider;
+        //private var mouse:FlxMouse;
 
         override public function create():void{
             FlxG.debug = true;
@@ -19,6 +21,9 @@ package
 
             _player = new Player();
             this.add(_player);
+
+            slider = new Slider(30);
+            this.add(slider);
 
             _fallingsprites = new FlxGroup();
             boob = new FallingSprite(Math.floor(Math.random()*(1+(FlxG.width))));
@@ -31,12 +36,12 @@ package
                 this.add(p)
                 _pillows.add(p);
 
-            score = new FlxText(10, 10, 100);
-            score.color = 0xFFFF0000;
-            score.scrollFactor.x = 0;
-            score.scrollFactor.y = 0;
-            score.text = toString();
-            add(score);
+            //score = new FlxText(10, 10, 100);
+            //score.color = 0xFFFF0000;
+            //score.scrollFactor.x = 0;
+            //score.scrollFactor.y = 0;
+            //score.text = toString();
+            //add(score);
 
             }
         }
@@ -67,6 +72,10 @@ package
                 FlxG.overlap(p, _pillows, killCollidePillow);
             }
 
+            //if(FlxG.mouse.justPressed()){
+              //  slider.x == FlxG.mouse.x;
+            //}
+
             super.update();
     }
 
@@ -81,8 +90,8 @@ package
         public function collisionCallback2(sprite:FallingSprite, pillow:Pillow):void{
             sprite.kill();
             pillow.kill();
-            FlxG.score += 1;
-            score.text = FlxG.score.toString()
+            //FlxG.score += 1;
+            //score.text = FlxG.score.toString()
         }
 
         //public function spritePile(sprite1:FallingSprite, sprite2:FallingSprite):void{

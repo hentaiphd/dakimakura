@@ -4,7 +4,7 @@ package{
     public class MenuState extends FlxState{
         override public function create():void{
             var t:FlxText;
-            t = new FlxText(0,FlxG.height/2-10,FlxG.width,"porno sites");
+            t = new FlxText(0,FlxG.height/2-10,FlxG.width,"dakimakura");
             t.size = 20;
             t.alignment = "center";
             add(t);
